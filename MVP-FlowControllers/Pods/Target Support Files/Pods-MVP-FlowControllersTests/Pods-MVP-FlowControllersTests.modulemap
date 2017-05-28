@@ -1,0 +1,6 @@
+framework module Pods_MVP_FlowControllersTests {
+  umbrella header "Pods-MVP-FlowControllersTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

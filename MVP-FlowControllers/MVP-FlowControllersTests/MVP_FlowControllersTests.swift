@@ -21,16 +21,23 @@ class MVP_FlowControllersTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testDashboardPresenter() {
+        let view = StubViewController()
+        let sut = DashboardPresenterImplementation(view: view)
+        view.presenter = sut
+        
+        sut.setupUI()
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+}
+
+private extension XCTestCase {
+    class StubViewController: DashboardView {
+        var presenter: DashboardPresenter!
+        
+        func updateUI(withTitleLabel titleText: String, withDescriptionLabel descriptionText: String, andButton title: String) {
+            XCTAssertEqual(titleText, "a")
+            XCTAssertEqual(descriptionText, "aa")
+            XCTAssertEqual("next", title)
         }
     }
-    
 }
