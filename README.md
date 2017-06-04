@@ -148,3 +148,5 @@ extension DashboardFlowController: ConfigureSecondViewControllerDelegate {
     }
 }
 ```
+
+`ConfigureDashboardViewControllerDelegate` and `ConfigureSecondViewControllerDelegate` are the delagates used by the viewcontrollers to comunicate with the FlowController.
