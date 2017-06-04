@@ -7,50 +7,62 @@
 //
 
 import Foundation
+import UIKit
+
+enum DashboardFlowState: Int {
+    case main
+    case detail
+}
 
 class DashboardFlowController: FlowController {
-    
-    enum DashboardFlowState: Int {
-        case first
-        case second
-    }
-    
     fileprivate let configure: FlowConfigure
     fileprivate var state: DashboardFlowState
     
     required init(configure: FlowConfigure) {
         self.configure = configure
-        self.state = .first
+        self.state = .main
     }
     
     func start() {
         switch self.state {
-        case .first:
+        case .main:
             guard let viewController = configureFirst() else { return }
             
             configure.navigationController?.pushViewController(viewController, animated: true)
-        default: ()
+        case .detail:
+            guard let viewController = configureSecond() else { return }
+            
+            configure.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
-    private func configureFirst() -> ViewController? {
+    fileprivate func configureFirst() -> UIViewController? {
         guard let viewController = R.storyboard.main.firstViewController() else { return nil }
-        let presenter = DashboardPresenterImplementation(view: viewController)
-        viewController.presenter = presenter
-        viewController.configure = ConfigureViewController(delegate: self)
+
+        viewController.presenter = DashboardPresenterImplementation(view: viewController)
+        viewController.configure = ConfigureDashboardViewController(delegate: self)
+        return viewController
+    }
+    
+    fileprivate func configureSecond() -> UIViewController? {
+        guard let viewController = R.storyboard.main.secondViewController() else { return nil }
+
+        viewController.presenter = SecondPresenterImplementation(view: viewController)
+        viewController.configure = ConfigureSecondViewController(delegate: self)
         return viewController
     }
 }
 
-extension DashboardFlowController: ConfigureViewControllerDelegate {
+extension DashboardFlowController: ConfigureDashboardViewControllerDelegate {
     func showNextViewController() {
-        guard let viewController = R.storyboard.main.secondViewController() else { return }
-        state = .second
-        viewController.configure = ConfigureViewController(delegate: self)
-        configure.navigationController?.pushViewController(viewController, animated: true)
+        state = .detail
+        
+        start()
     }
-    
+}
+
+extension DashboardFlowController: ConfigureSecondViewControllerDelegate {
     func backToFirstViewController() {
-        state = .first
+        state = .main
     }
 }

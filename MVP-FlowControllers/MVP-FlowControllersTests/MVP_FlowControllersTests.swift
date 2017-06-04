@@ -22,8 +22,16 @@ class MVP_FlowControllersTests: XCTestCase {
     }
     
     func testDashboardPresenter() {
-        let view = StubViewController()
+        let view = MockDashboardViewController()
         let sut = DashboardPresenterImplementation(view: view)
+        view.presenter = sut
+        
+        sut.setupUI()
+    }
+    
+    func testSecondPresenter() {
+        let view = MockSecondViewController()
+        let sut = SecondPresenterImplementation(view: view, dataManager: MockDataManager())
         view.presenter = sut
         
         sut.setupUI()
@@ -31,7 +39,7 @@ class MVP_FlowControllersTests: XCTestCase {
 }
 
 private extension XCTestCase {
-    class StubViewController: DashboardView {
+    class MockDashboardViewController: DashboardView {
         var presenter: DashboardPresenter!
         
         func updateUI(withTitleLabel titleText: String, withDescriptionLabel descriptionText: String, andButton title: String) {
@@ -39,5 +47,23 @@ private extension XCTestCase {
             XCTAssertEqual(descriptionText, "aa")
             XCTAssertEqual("next", title)
         }
+    }
+    
+    class MockSecondViewController: SecondView {
+        var presenter: SecondPresenter!
+        
+        func updateUI(withDescriptionLabel descriptionText: String) {
+            XCTAssertEqual(descriptionText, StubObject.object)
+        }
+    }
+    
+    class MockDataManager: DataManager {
+        func gerData(completition: @escaping (Any?) -> Void) {
+            completition(StubObject.object)
+        }
+    }
+    
+    struct StubObject {
+        static let object = "TestMVP"
     }
 }

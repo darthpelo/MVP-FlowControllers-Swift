@@ -10,7 +10,7 @@
 		A20621CAD2940C6776CA753C /* Pods_MVP_FlowControllersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F011BEFC6B2838F331D2155 /* Pods_MVP_FlowControllersTests.framework */; };
 		A23BE516184DDE3A002D41FA /* Pods_MVP_FlowControllers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827731D790724C6D2145477C /* Pods_MVP_FlowControllers.framework */; };
 		D9296CB31EDB0F4900C54D89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CB21EDB0F4900C54D89 /* AppDelegate.swift */; };
-		D9296CB51EDB0F4900C54D89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CB41EDB0F4900C54D89 /* ViewController.swift */; };
+		D9296CB51EDB0F4900C54D89 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CB41EDB0F4900C54D89 /* DashboardViewController.swift */; };
 		D9296CB81EDB0F4900C54D89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9296CB61EDB0F4900C54D89 /* Main.storyboard */; };
 		D9296CBA1EDB0F4900C54D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9296CB91EDB0F4900C54D89 /* Assets.xcassets */; };
 		D9296CBD1EDB0F4900C54D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9296CBB1EDB0F4900C54D89 /* LaunchScreen.storyboard */; };
@@ -21,6 +21,8 @@
 		D9296CDC1EDB122100C54D89 /* DashboardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CDB1EDB122100C54D89 /* DashboardFlowController.swift */; };
 		D9296CDF1EDB143F00C54D89 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CDE1EDB143F00C54D89 /* R.generated.swift */; };
 		D9296CE11EDB5A5C00C54D89 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CE01EDB5A5C00C54D89 /* SecondViewController.swift */; };
+		D932079B1EE495C600930D55 /* SecondPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932079A1EE495C600930D55 /* SecondPresenter.swift */; };
+		D932079D1EE49A3F00930D55 /* FlowInizializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932079C1EE49A3F00930D55 /* FlowInizializer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +42,8 @@
 		9F011BEFC6B2838F331D2155 /* Pods_MVP_FlowControllersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVP_FlowControllersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72155E5C4CCDBD05B453558 /* Pods-MVP-FlowControllers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP-FlowControllers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MVP-FlowControllers/Pods-MVP-FlowControllers.debug.xcconfig"; sourceTree = "<group>"; };
 		D9296CAF1EDB0F4900C54D89 /* MVP-FlowControllers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVP-FlowControllers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9296CB21EDB0F4900C54D89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "MVP-FlowControllers/AppDelegate.swift"; sourceTree = "<group>"; };
-		D9296CB41EDB0F4900C54D89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D9296CB21EDB0F4900C54D89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D9296CB41EDB0F4900C54D89 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		D9296CB71EDB0F4900C54D89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D9296CB91EDB0F4900C54D89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "MVP-FlowControllers/Assets.xcassets"; sourceTree = "<group>"; };
 		D9296CBC1EDB0F4900C54D89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,6 +57,8 @@
 		D9296CDB1EDB122100C54D89 /* DashboardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardFlowController.swift; sourceTree = "<group>"; };
 		D9296CDE1EDB143F00C54D89 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		D9296CE01EDB5A5C00C54D89 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		D932079A1EE495C600930D55 /* SecondPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondPresenter.swift; sourceTree = "<group>"; };
+		D932079C1EE49A3F00930D55 /* FlowInizializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowInizializer.swift; sourceTree = "<group>"; };
 		EC38112BF3675775D2643FE8 /* Pods-MVP-FlowControllersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP-FlowControllersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MVP-FlowControllersTests/Pods-MVP-FlowControllersTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,12 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				D9296CB11EDB0F4900C54D89 /* MVP-FlowControllers */,
-				D9296CBE1EDB0F4900C54D89 /* Info.plist */,
-				D9296CB21EDB0F4900C54D89 /* AppDelegate.swift */,
-				D9296CDE1EDB143F00C54D89 /* R.generated.swift */,
-				D9296CB91EDB0F4900C54D89 /* Assets.xcassets */,
-				D9296CBB1EDB0F4900C54D89 /* LaunchScreen.storyboard */,
-				D9296CB61EDB0F4900C54D89 /* Main.storyboard */,
+				D932079E1EE4A1F300930D55 /* Support Files */,
 				D9296CC61EDB0F4900C54D89 /* MVP-FlowControllersTests */,
 				D9296CB01EDB0F4900C54D89 /* Products */,
 				2208A4C66A16D35528A53125 /* Pods */,
@@ -127,6 +126,7 @@
 		D9296CB11EDB0F4900C54D89 /* MVP-FlowControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D9296CB21EDB0F4900C54D89 /* AppDelegate.swift */,
 				D9296CD21EDB0FFF00C54D89 /* FlowControllers */,
 				D9296CD31EDB100800C54D89 /* Scenes */,
 			);
@@ -145,9 +145,10 @@
 		D9296CD21EDB0FFF00C54D89 /* FlowControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D9296CD51EDB108D00C54D89 /* FlowController.swift */,
-				D9296CD71EDB10C200C54D89 /* MainFlowController.swift */,
 				D9296CDB1EDB122100C54D89 /* DashboardFlowController.swift */,
+				D9296CD51EDB108D00C54D89 /* FlowController.swift */,
+				D932079C1EE49A3F00930D55 /* FlowInizializer.swift */,
+				D9296CD71EDB10C200C54D89 /* MainFlowController.swift */,
 			);
 			name = FlowControllers;
 			sourceTree = "<group>";
@@ -164,10 +165,23 @@
 			isa = PBXGroup;
 			children = (
 				D9296CD91EDB117300C54D89 /* DashboardPresenter.swift */,
-				D9296CB41EDB0F4900C54D89 /* ViewController.swift */,
+				D9296CB41EDB0F4900C54D89 /* DashboardViewController.swift */,
+				D932079A1EE495C600930D55 /* SecondPresenter.swift */,
 				D9296CE01EDB5A5C00C54D89 /* SecondViewController.swift */,
 			);
 			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		D932079E1EE4A1F300930D55 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D9296CBE1EDB0F4900C54D89 /* Info.plist */,
+				D9296CDE1EDB143F00C54D89 /* R.generated.swift */,
+				D9296CB91EDB0F4900C54D89 /* Assets.xcassets */,
+				D9296CBB1EDB0F4900C54D89 /* LaunchScreen.storyboard */,
+				D9296CB61EDB0F4900C54D89 /* Main.storyboard */,
+			);
+			name = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,12 +405,14 @@
 			files = (
 				D9296CE11EDB5A5C00C54D89 /* SecondViewController.swift in Sources */,
 				D9296CD81EDB10C200C54D89 /* MainFlowController.swift in Sources */,
+				D932079D1EE49A3F00930D55 /* FlowInizializer.swift in Sources */,
 				D9296CDF1EDB143F00C54D89 /* R.generated.swift in Sources */,
 				D9296CDA1EDB117300C54D89 /* DashboardPresenter.swift in Sources */,
 				D9296CDC1EDB122100C54D89 /* DashboardFlowController.swift in Sources */,
-				D9296CB51EDB0F4900C54D89 /* ViewController.swift in Sources */,
+				D9296CB51EDB0F4900C54D89 /* DashboardViewController.swift in Sources */,
 				D9296CB31EDB0F4900C54D89 /* AppDelegate.swift in Sources */,
 				D9296CD61EDB108D00C54D89 /* FlowController.swift in Sources */,
+				D932079B1EE495C600930D55 /* SecondPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
