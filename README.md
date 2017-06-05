@@ -150,3 +150,167 @@ extension DashboardFlowController: ConfigureSecondViewControllerDelegate {
 ```
 
 `ConfigureDashboardViewControllerDelegate` and `ConfigureSecondViewControllerDelegate` are the delagates used by the viewcontrollers to comunicate with the FlowController.
+
+## Presenters
+Each presenters control only one viewcontroller. This control happens by an interface/protocol so you can test your presenter passing its a Mocked object conforms to this protocol.
+
+### DashboardPresenter.swift
+
+```swift
+protocol DashboardView: class {
+    func updateUI(withTitleLabel titleText: String, withDescriptionLabel descriptionText: String, andButton title: String)
+}
+
+protocol DashboardPresenter {
+    func setupUI()
+}
+
+class DashboardPresenterImplementation: DashboardPresenter {
+    fileprivate weak var view: DashboardView?
+    
+    init(view: DashboardView?) {
+        self.view = view
+    }
+    
+    // MARK: - DashboardPresenter
+    func setupUI() {
+        view?.updateUI(withTitleLabel: "a", withDescriptionLabel: "aa", andButton: "next")
+    }
+}
+```
+
+### SecondPresenter.swift
+
+```swift
+protocol SecondView: class {
+    func updateUI(withDescriptionLabel descriptionText: String)
+}
+
+protocol SecondPresenter {
+    func setupUI()
+}
+
+class SecondPresenterImplementation: SecondPresenter {
+    fileprivate weak var view: SecondView?
+    fileprivate let dataManager: DataManager
+    
+    init(view: SecondView?, dataManager: DataManager = DataManagerImplementation()) {
+        self.view = view
+        self.dataManager = dataManager
+    }
+    
+    // MARK: - DashboardPresenter
+    func setupUI() {
+        getObject()
+    }
+    
+    private func getObject() {
+        dataManager.getData { (result) in
+            guard let result = result as? [String: String] else { return }
+            guard let label = result["object"] else { return }
+            
+            self.view?.updateUI( withDescriptionLabel: label)
+        }
+    }
+}
+
+protocol DataManager {
+    func gerData(completition:@escaping (Any?) -> Void)
+}
+
+struct DataManagerImplementation: DataManager {
+    func gerData(completition: @escaping (Any?) -> Void) {
+        completition(["object": "MVP Test"])
+    }
+}
+```
+
+## ViewControllers
+
+Also the ViewControllers have an interface/protocol as connection with respective presenters and with the FlowController.
+
+### DashboardViewController.swift
+
+`ConfigureDashboardViewControllerDelegate` it's the procol that `DashboardFlowController` implements to riceive the request to show the next viewcontroller.
+
+```swift
+struct ConfigureDashboardViewController {
+    weak var delegate: ConfigureDashboardViewControllerDelegate?
+}
+
+protocol ConfigureDashboardViewControllerDelegate: class {
+    func showNextViewController()
+}
+
+class DashboardViewController: UIViewController, DashboardView {
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var nextButton: UIButton!
+    
+    var presenter: DashboardPresenter!
+    var configure: ConfigureDashboardViewController!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presenter.setupUI()
+    }
+
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        configure.delegate?.showNextViewController()
+    }
+    
+    // MARK: - DashboardView protocol
+    func updateUI(withTitleLabel titleText: String,
+                  withDescriptionLabel descriptionText: String,
+                  andButton title: String) {
+        DispatchQueue.main.async {
+            self.title = titleText
+            self.descriptionLabel.text = descriptionText
+            self.nextButton.setTitle(title, for: .normal)
+        }
+    }
+}
+
+```
+
+### SecondViewController.swift
+
+```swift
+struct ConfigureSecondViewController {
+    weak var delegate: ConfigureSecondViewControllerDelegate?
+}
+
+protocol ConfigureSecondViewControllerDelegate: class {
+    func backToFirstViewController()
+}
+
+class SecondViewController: UIViewController {
+    @IBOutlet weak var label: UILabel!
+    
+    var presenter: SecondPresenter!
+    var configure: ConfigureSecondViewController!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presenter.setupUI()
+    }
+    
+    override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
+        
+        if parent == self.navigationController?.parent {
+            configure.delegate?.backToFirstViewController()
+        }
+    }
+}
+
+extension SecondViewController: SecondView {
+    func updateUI(withDescriptionLabel descriptionText: String) {
+        DispatchQueue.main.async {
+            self.label.text = descriptionText
+        }
+    }
+}
+
+```
