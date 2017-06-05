@@ -8,6 +8,8 @@ The main idea is to create an open project so that everyone can give his point o
 
 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
 
+![Schema](architecture-schema.png)
+
 ## FlowControllers
 
 ### FlowController.swift
