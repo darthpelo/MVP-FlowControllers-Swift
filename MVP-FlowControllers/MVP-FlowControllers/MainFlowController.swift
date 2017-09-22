@@ -10,10 +10,14 @@ import UIKit
 
 class MainFlowController: FlowController {
     let configure: FlowConfigure
-    var childFlow: FlowController?
+    private var childFlow: FlowController?
     
     required init(configure: FlowConfigure) {
         self.configure = configure
+    }
+    
+    deinit {
+        childFlow = nil
     }
     
     func start() {
