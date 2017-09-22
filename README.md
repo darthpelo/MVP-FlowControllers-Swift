@@ -64,12 +64,16 @@ This is the first FlowController instantiated in your project. It doesn't create
 ```swift
 class MainFlowController: FlowController {
     let configure: FlowConfigure
-    var childFlow: FlowController?
+    private var childFlow: FlowController?
 
     required init(configure: FlowConfigure) {
         self.configure = configure
     }
 
+    deinit {
+        childFlow = nil
+    }
+    
     func start() {
         let navigationController = UINavigationController()
         if let frame = configure.window?.bounds {
