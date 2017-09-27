@@ -12,11 +12,12 @@ import UIKit
 enum DashboardFlowState: Int {
     case main
     case detail
+    case secret
 }
 
 class DashboardFlowController: FlowController {
-    fileprivate let configure: FlowConfigure
-    fileprivate var state: DashboardFlowState
+    private let configure: FlowConfigure
+    private var state: DashboardFlowState
     
     required init(configure: FlowConfigure) {
         self.configure = configure
@@ -33,41 +34,58 @@ class DashboardFlowController: FlowController {
             guard let viewController = configureSecond() else { return }
             
             configure.navigationController?.pushViewController(viewController, animated: true)
+        case .secret:
+            guard let viewController = configureSecret() else { return }
+            
+            configure.navigationController?.pushViewController(viewController, animated: false)
         }
     }
     
-    fileprivate func configureFirst() -> UIViewController? {
+    // MARK: - Private
+    private func configureFirst() -> UIViewController? {
         guard let viewController = R.storyboard.main.firstViewController() else { return nil }
         
-        viewController.presenter = DashboardPresenterImplementation(view: viewController)
-        viewController.configure = ConfigureDashboardViewController(delegate: self)
+        viewController.presenter = DashboardPresenter(view: viewController)
+        viewController.configure = ConfigureDashboard(delegate: self)
         return viewController
     }
     
-    fileprivate func configureSecond() -> UIViewController? {
+    private func configureSecond() -> UIViewController? {
         guard let viewController = R.storyboard.main.secondViewController() else { return nil }
         
-        viewController.presenter = SecondPresenterImplementation(view: viewController)
-        viewController.configure = ConfigureSecondViewController(delegate: self)
+        viewController.presenter = SecondPresenter(view: viewController)
+        viewController.configure = ConfigureSecondViewController(flowController: self)
         return viewController
     }
     
-    fileprivate func goNext() {
+    private func configureSecret() -> UIViewController? {
+        guard let viewController = R.storyboard.main.secretViewController() else { return nil }
+        
+        viewController.presenter = SecretPresenterImplementation(view: viewController)
+        viewController.configure = ConfigureSecretViewController(flowController: self)
+        return viewController
+    }
+    
+    private func goNext() {
         switch state {
         case .main:
             self.state = .detail
-        case .detail:
+        case .detail, .secret:
             return
         }
     }
     
-    fileprivate func goPrevious() {
+    private func goPrevious() {
         switch state {
         case .main:
             return
-        case .detail:
+        case .detail, .secret:
             self.state = .main
         }
+    }
+    
+    private func goToSecret() {
+        self.state = .secret
     }
 }
 
@@ -80,7 +98,15 @@ extension DashboardFlowController: ConfigureDashboardViewControllerDelegate {
 }
 
 extension DashboardFlowController: ConfigureSecondViewControllerDelegate {
-    func backToFirstViewController() {
+    func showSecret() {
+        configure.navigationController?.popToRootViewController(animated: false)
+        goToSecret()
+        start()
+    }
+}
+
+extension DashboardFlowController: FlowControllerDelegate {
+    func backToDashboard() {
         goPrevious()
     }
 }

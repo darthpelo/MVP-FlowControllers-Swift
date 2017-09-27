@@ -1,12 +1,19 @@
-# MVP-FlowControllers-Swift
+![Swift-4](https://img.shields.io/badge/Swift-4.0-orange.svg)
 
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+# MVP-FlowControllers-Swift
 
 After read [@merowing_](https://twitter.com/merowing_) post about FlowControllers and [this](https://github.com/digoreis/ExampleMVVMFlow) example about FlowControllers and MVVM, I decided to create a simple example using MVP and FlowControllers.
 
-The main idea is to create an open project so that everyone can give his point of view on this architecture, because at this moment I have not found any good example.
+The main idea is to create an open project so that everyone can give his point of view on FlowControllers architecture, because at this moment I have not found any good example.
 
-🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+## Description
+
+Each scenes of your application is managed by a FlowController. A FlowController can instantiates
+one or more couple "Presenter/ViewController".
+* The Dependency Injection is handled through the `init` of each Presenter.
+* The Dependency Inversion through the Presenter and View protocols.
+* Only the ViewContoller can communicates (pass generic data) to the FlowController, but using an interface.
+
 
 ![Schema](architecture-schema.png)
 
@@ -59,7 +66,7 @@ struct FlowInizializer {
 
 ### MainFlowController.swift
 
-This is the first FlowController instantiated in your project. It doesn't create any `ViewController` and `Presenter` couple, but just a FlowController child.
+This is the first (root) FlowController instantiated in your project. It doesn't create any `ViewController` and `Presenter` couple, but just one or more FlowController child. For example, the FC of the On Boarding of your application and the FC of the Main Scene of the application.
 
 ```swift
 class MainFlowController: FlowController {
@@ -73,7 +80,7 @@ class MainFlowController: FlowController {
     deinit {
         childFlow = nil
     }
-    
+
     func start() {
         let navigationController = UINavigationController()
         if let frame = configure.window?.bounds {
@@ -92,13 +99,14 @@ class MainFlowController: FlowController {
 
 ### DashboardFlowController.swift
 
-This is an FlowController example. It controls the flow of two (the only two 😅) viewcontroller in the project, `DashboardViewController` and `SecondViewController`.
-In the functions `configureFirst()` and `configureSecond()` the FlowController instantiates the viewcontrollers and their presenters and pushes them in the `navigationController`.
+This is an FlowController example. It controls the flow of 3 viewcontrollers: `DashboardViewController`, `SecondViewController` and `SecretViewController`.
+In the functions `configureFirst()`, `configureSecond()` and `configureSecret()` the FlowController instantiates the viewcontrollers and their presenters and pushes them in the `navigationController`.
 
 ```swift
 enum DashboardFlowState: Int {
     case main
     case detail
+    case secret
 }
 
 class DashboardFlowController: FlowController {
@@ -120,10 +128,14 @@ class DashboardFlowController: FlowController {
             guard let viewController = configureSecond() else { return }
 
             configure.navigationController?.pushViewController(viewController, animated: true)
+        case .secret:
+            guard let viewController = configureSecret() else { return }
+
+            configure.navigationController?.pushViewController(viewController, animated: false)
         }
     }
 
-    fileprivate func configureFirst() -> UIViewController? {
+    private func configureFirst() -> UIViewController? {
         guard let viewController = R.storyboard.main.firstViewController() else { return nil }
 
         viewController.presenter = DashboardPresenterImplementation(view: viewController)
@@ -131,7 +143,7 @@ class DashboardFlowController: FlowController {
         return viewController
     }
 
-    fileprivate func configureSecond() -> UIViewController? {
+    private func configureSecond() -> UIViewController? {
         guard let viewController = R.storyboard.main.secondViewController() else { return nil }
 
         viewController.presenter = SecondPresenterImplementation(view: viewController)
@@ -139,22 +151,26 @@ class DashboardFlowController: FlowController {
         return viewController
     }
 
-    fileprivate func goNext() {
+    private func goNext() {
         switch state {
         case .main:
             self.state = .detail
-        case .detail:
+        case .detail, .secret:
             return
         }
     }
 
-    fileprivate func goPrevious() {
+    private func goPrevious() {
         switch state {
         case .main:
             return
-        case .detail:
+        case .detail, .secret:
             self.state = .main
         }
+    }
+
+    private func goToSecret() {
+        self.state = .secret
     }
 }
 
@@ -205,6 +221,10 @@ class DashboardPresenterImplementation: DashboardPresenter {
 
 ### SecondPresenter.swift
 
+Dependency Injection is handled in the `init` of the protocol implementation, using
+the Swift's property of setting a default value for function parameters. With this solution,
+the FlowController is decoupled with the Presenter.
+
 ```swift
 protocol SecondView: class {
     func updateUI(withDescriptionLabel descriptionText: String)
@@ -226,25 +246,6 @@ class SecondPresenterImplementation: SecondPresenter {
     // MARK: - DashboardPresenter
     func setupUI() {
         getObject()
-    }
-
-    private func getObject() {
-        dataManager.getData { (result) in
-            guard let result = result as? [String: String] else { return }
-            guard let label = result["object"] else { return }
-
-            self.view?.updateUI( withDescriptionLabel: label)
-        }
-    }
-}
-
-protocol DataManager {
-    func gerData(completition:@escaping (Any?) -> Void)
-}
-
-struct DataManagerImplementation: DataManager {
-    func gerData(completition: @escaping (Any?) -> Void) {
-        completition(["object": "MVP Test"])
     }
 }
 ```

@@ -21,8 +21,13 @@
 		D9296CDC1EDB122100C54D89 /* DashboardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CDB1EDB122100C54D89 /* DashboardFlowController.swift */; };
 		D9296CDF1EDB143F00C54D89 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CDE1EDB143F00C54D89 /* R.generated.swift */; };
 		D9296CE11EDB5A5C00C54D89 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9296CE01EDB5A5C00C54D89 /* SecondViewController.swift */; };
-		D932079B1EE495C600930D55 /* SecondPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932079A1EE495C600930D55 /* SecondPresenter.swift */; };
+		D932079B1EE495C600930D55 /* SecondPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932079A1EE495C600930D55 /* SecondPresentable.swift */; };
 		D932079D1EE49A3F00930D55 /* FlowInizializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932079C1EE49A3F00930D55 /* FlowInizializer.swift */; };
+		D97C6DFE1F7AF31800074AF1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C6DFD1F7AF31800074AF1 /* Extensions.swift */; };
+		D9BAA7FB1F75B93500EDF24F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BAA7FA1F75B93500EDF24F /* DataManager.swift */; };
+		D9EA89171F784BE00045F1CF /* SecretViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EA89161F784BE00045F1CF /* SecretViewController.swift */; };
+		D9EA89191F784BF10045F1CF /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EA89181F784BF10045F1CF /* Protocols.swift */; };
+		D9EA891B1F784C5E0045F1CF /* SecretPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EA891A1F784C5E0045F1CF /* SecretPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +62,13 @@
 		D9296CDB1EDB122100C54D89 /* DashboardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardFlowController.swift; sourceTree = "<group>"; };
 		D9296CDE1EDB143F00C54D89 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		D9296CE01EDB5A5C00C54D89 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		D932079A1EE495C600930D55 /* SecondPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondPresenter.swift; sourceTree = "<group>"; };
+		D932079A1EE495C600930D55 /* SecondPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondPresentable.swift; sourceTree = "<group>"; };
 		D932079C1EE49A3F00930D55 /* FlowInizializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowInizializer.swift; sourceTree = "<group>"; };
+		D97C6DFD1F7AF31800074AF1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D9BAA7FA1F75B93500EDF24F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		D9EA89161F784BE00045F1CF /* SecretViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretViewController.swift; sourceTree = "<group>"; };
+		D9EA89181F784BF10045F1CF /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		D9EA891A1F784C5E0045F1CF /* SecretPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretPresenter.swift; sourceTree = "<group>"; };
 		EC38112BF3675775D2643FE8 /* Pods-MVP-FlowControllersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVP-FlowControllersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MVP-FlowControllersTests/Pods-MVP-FlowControllersTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,8 +137,11 @@
 			isa = PBXGroup;
 			children = (
 				D9296CB21EDB0F4900C54D89 /* AppDelegate.swift */,
+				D9EA89181F784BF10045F1CF /* Protocols.swift */,
+				D9BAA7F91F75B92200EDF24F /* DataManager */,
 				D9296CD21EDB0FFF00C54D89 /* FlowControllers */,
 				D9296CD31EDB100800C54D89 /* Scenes */,
+				D97C6DFD1F7AF31800074AF1 /* Extensions.swift */,
 			);
 			path = "MVP-FlowControllers";
 			sourceTree = "<group>";
@@ -166,8 +179,10 @@
 			children = (
 				D9296CD91EDB117300C54D89 /* DashboardPresenter.swift */,
 				D9296CB41EDB0F4900C54D89 /* DashboardViewController.swift */,
-				D932079A1EE495C600930D55 /* SecondPresenter.swift */,
+				D932079A1EE495C600930D55 /* SecondPresentable.swift */,
 				D9296CE01EDB5A5C00C54D89 /* SecondViewController.swift */,
+				D9EA891A1F784C5E0045F1CF /* SecretPresenter.swift */,
+				D9EA89161F784BE00045F1CF /* SecretViewController.swift */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -184,6 +199,14 @@
 			name = "Support Files";
 			sourceTree = "<group>";
 		};
+		D9BAA7F91F75B92200EDF24F /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				D9BAA7FA1F75B93500EDF24F /* DataManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,6 +221,7 @@
 				D9296CAD1EDB0F4900C54D89 /* Resources */,
 				BAB1EC51A15A01D3D7844C0D /* [CP] Embed Pods Frameworks */,
 				0A0942C77459A896A5301CCC /* [CP] Copy Pods Resources */,
+				D9BAA7F81F75B75200EDF24F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -392,6 +416,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
 		};
+		D9BAA7F81F75B75200EDF24F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		FF5F01EC44715090427C56C1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,14 +453,19 @@
 			files = (
 				D9296CE11EDB5A5C00C54D89 /* SecondViewController.swift in Sources */,
 				D9296CD81EDB10C200C54D89 /* MainFlowController.swift in Sources */,
+				D9EA89171F784BE00045F1CF /* SecretViewController.swift in Sources */,
 				D932079D1EE49A3F00930D55 /* FlowInizializer.swift in Sources */,
 				D9296CDF1EDB143F00C54D89 /* R.generated.swift in Sources */,
 				D9296CDA1EDB117300C54D89 /* DashboardPresenter.swift in Sources */,
 				D9296CDC1EDB122100C54D89 /* DashboardFlowController.swift in Sources */,
 				D9296CB51EDB0F4900C54D89 /* DashboardViewController.swift in Sources */,
+				D9EA891B1F784C5E0045F1CF /* SecretPresenter.swift in Sources */,
 				D9296CB31EDB0F4900C54D89 /* AppDelegate.swift in Sources */,
+				D97C6DFE1F7AF31800074AF1 /* Extensions.swift in Sources */,
+				D9EA89191F784BF10045F1CF /* Protocols.swift in Sources */,
+				D9BAA7FB1F75B93500EDF24F /* DataManager.swift in Sources */,
 				D9296CD61EDB108D00C54D89 /* FlowController.swift in Sources */,
-				D932079B1EE495C600930D55 /* SecondPresenter.swift in Sources */,
+				D932079B1EE495C600930D55 /* SecondPresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

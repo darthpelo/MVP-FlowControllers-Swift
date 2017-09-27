@@ -9,7 +9,7 @@
 import XCTest
 @testable import MVP_FlowControllers
 
-class MVP_FlowControllersTests: XCTestCase {
+class MVPFlowControllersTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -31,7 +31,7 @@ class MVP_FlowControllersTests: XCTestCase {
     
     func testSecondPresenter() {
         let view = MockSecondViewController()
-        let sut = SecondPresenterImplementation(view: view, dataManager: MockDataManager())
+        let sut = SecondPresenter(view: view, dataManager: MockDataManager())
         view.presenter = sut
         
         sut.setupUI()
@@ -50,7 +50,7 @@ private extension XCTestCase {
     }
     
     class MockSecondViewController: SecondView {
-        var presenter: SecondPresenter!
+        var presenter: SecondPresentable!
         
         func updateUI(withDescriptionLabel descriptionText: String) {
             XCTAssertEqual(descriptionText, StubObject.object)

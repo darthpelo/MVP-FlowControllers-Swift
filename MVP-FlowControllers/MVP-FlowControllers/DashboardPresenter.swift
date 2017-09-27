@@ -9,15 +9,7 @@
 import Foundation
 import UIKit
 
-protocol DashboardView: class {
-    func updateUI(withTitleLabel titleText: String, withDescriptionLabel descriptionText: String, andButton title: String)
-}
-
-protocol DashboardPresenter {
-    func setupUI()
-}
-
-class DashboardPresenterImplementation: DashboardPresenter {
+class DashboardPresenter: DashboardPresentable {
     fileprivate weak var view: DashboardView?
     
     init(view: DashboardView?) {
@@ -26,6 +18,8 @@ class DashboardPresenterImplementation: DashboardPresenter {
     
     // MARK: - DashboardPresenter
     func setupUI() {
-        view?.updateUI(withTitleLabel: "a", withDescriptionLabel: "aa", andButton: "next")
+        view?.updateUI(withTitleLabel: "Dashboard",
+                       withDescriptionLabel: "First ViewController",
+                       andButton: "Next")
     }
 }

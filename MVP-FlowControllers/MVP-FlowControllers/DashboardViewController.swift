@@ -8,25 +8,21 @@
 
 import UIKit
 
-struct ConfigureDashboardViewController {
+struct ConfigureDashboard {
     weak var delegate: ConfigureDashboardViewControllerDelegate?
-}
-
-protocol ConfigureDashboardViewControllerDelegate: class {
-    func showNextViewController()
 }
 
 class DashboardViewController: UIViewController, DashboardView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     
-    var presenter: DashboardPresenter!
-    var configure: ConfigureDashboardViewController!
+    var presenter: DashboardPresenter?
+    var configure: ConfigureDashboard!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        presenter.setupUI()
+        presenter?.setupUI()
     }
 
     @IBAction func nextButtonTapped(_ sender: Any) {

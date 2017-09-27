@@ -26,4 +26,3 @@ extension AppDelegate {
         FlowInizializer().configure(window)
     }
 }
-
